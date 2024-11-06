@@ -1,0 +1,111 @@
+.log-in {
+    background-color: #f7f7f2;
+    font-family: Verdana;
+    text-align: center;
+}
+.form-container h1{
+    font-family: 'Merienda', cursive;    
+    font-size: 40px;
+    font-style: oblique;
+}
+.form-container p{
+    font-family: 'Merienda', cursive;
+    font-style: oblique;
+    font-size: 20px;
+}
+.box-outer{
+    text-align: center;
+    padding-top: 0.2px;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+}
+.par12{
+    background-color: brown;
+    background-image: url('./photo.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 700px;
+    height: 500px;
+    border-radius: 10px;
+    transform: scale(0.9);
+    margin:0;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    margin-left: -35px;
+}
+.log-in form {
+    background-color: #ffff;
+    width: 700px;
+    padding: 30px 20px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    height: 500px;
+    padding-top: 20px;
+    transform: scale(0.9);
+    margin: 0;
+   
+    margin-right: -35px;
+    padding-left: 50px;
+
+}
+
+/* Styling form-control Class */
+.form-control-sp {
+    text-align: left;
+    margin-bottom: 25px;
+    
+}
+
+/* Styling form-control Label */
+.form-control-sp label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+/* Styling form-control input,
+select, textarea */
+.form-control-sp input,
+.form-control-sp select,
+.form-control-sp textarea {
+    border: 1px solid  rgb(238, 223, 223);
+    border-radius: 4px;
+    font-family: inherit;
+    padding: 10px;
+    display: block;
+    width: 95%;
+    height: 38px;
+}
+
+/* Styling form-control Radio
+button and Checkbox */
+
+
+/* Styling Button */
+.log-in form button {
+    background-color:rgb(76, 106, 61);
+    border:  rgb(102, 143, 81);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight:600;
+    width: 45%;
+    margin-bottom: 20px;
+    height: 45px;
+    color: rgb(255, 255, 255); 
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.301);
+    text-align: center;
+    transition-duration: 0.5s;
+    
+}
+.log-in button:hover{
+    background-color:rgb(94, 148, 67);
+    cursor: pointer;
+    box-shadow: 0px 0px 12px rgba(94, 148, 67, 0.89);
+    
+}

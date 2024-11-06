@@ -1,0 +1,159 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-family: 'Merienda', cursive;
+  font-style: oblique;
+  font-size: 15px;
+}
+
+/* Navbar links */
+.lien {
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #333;
+  padding: 2rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.lien:hover {
+  color:#BC6C25 ;
+}
+
+/* Search input */
+.search {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 250px;
+  border-radius: 10px;
+  border: solid 2px rgb(76, 106, 61);
+  transition: all 0.4s ease-in-out;
+}
+.search:hover{
+  border: solid 2px #BC6C25;
+}
+/* Search results container */
+.divv {
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
+/* Search results list */
+.divv ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Search results list items */
+.divv ul li {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+/* Profile photo */
+.navbar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+/* Logout button */
+.navbar button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Profile name */
+.navbar p {
+  margin: 0;
+}
+
+/* Login link */
+.v3 {
+  background-color: rgb(76, 106, 61);
+  color: #fff;
+  padding: auto;
+  border-radius: 10px;
+  transition: all 0.4s ease-in-out;
+}
+.v3:hover {
+  background-color: #BC6C25;
+}
+
+
+.avant{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  margin-left: 160px;
+}
+.log{
+  margin-right: 100px;
+}
+
+.divv li{
+  text-decoration: none;
+  
+}
+a.lien{
+  padding: 10px 20px;
+}
+
+.divv li{
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  margin-right:200px;
+
+}
+
+.navbar{
+padding-right: 10%;
+}
+.logout{
+font-size: larger;
+}
+.nav {
+
+width: auto;
+height: auto;
+}
+.useeer {
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.btn-h {
+  background-color:rgb(76, 106, 61) ;
+  color: #fff;
+  font-family: 'Merienda', cursive;
+  font-style: oblique;
+  font-size: 15px;
+}
+.nom{
+text-decoration: none;
+color: #333;
+}
+.lista{
+  list-style-type: none;
+  text-decoration: none;
+  color: #333;
+  }
+
