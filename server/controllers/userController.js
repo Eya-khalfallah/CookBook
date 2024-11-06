@@ -1,8 +1,6 @@
 const User = require("../models/User");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const createUserValidation = require("../Validation/createUserValidation");
-const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -16,11 +14,11 @@ exports.getAllUsers = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { email, firstName, lastName, nationality, password } = req.body;
+    const { email, firstName, lastName, nationality, password, photo } =
+      req.body;
+    const photoUrl = req.file ? req.file.path : null; // Get the Cloudinary URL if uploaded
 
-    // Remove Cloudinary logic for testing purposes
-    let photo = req.body.photo; // photo sent as URL, if provided
-
+    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already in use." });
@@ -28,13 +26,14 @@ exports.createUser = async (req, res) => {
 
     const hashedPassword = await bcryptjs.hash(password, 10);
 
+    // Create a new user with the Cloudinary photo URL
     const user = new User({
       email,
       firstName,
       lastName,
       nationality,
       password: hashedPassword,
-      photo,
+      photo: photoUrl, // Save the photo URL to MongoDB
     });
 
     await user.save();
@@ -59,7 +58,8 @@ exports.login = async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ userId: user._id }, "your-secret-key");
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+
     res.json({ token, userData: user });
   } catch (error) {
     res.status(500).json({ error: "Server Error" });

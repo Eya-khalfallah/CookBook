@@ -11,8 +11,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: '',  // specify the folder on Cloudinary
+    folder: 'users_photos',  // specify the folder on Cloudinary
     allowedFormats: ['jpg', 'png', 'jpeg'],
+    public_id: (req, file) => file.originalname,  // Use original filename or specify your own unique ID
   },
 });
 
