@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+.container-recipe{
+    font-family: 'Merienda', cursive; 
+}
+.box-13 {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.301);
+    width: 100%;
+    height: 580px;
+    transition: transform 1s ease-in-out;
+   
+}
+.box-13 img {
+    display: block;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.9;
+    transition: transform 0.8s ease;
+}
+.box-13:hover img {
+    transform: scale(1.08);
+  }
+.text-container-h {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    font-size: 100px;
+    width: 50%;
+    height: 330px;
+    background-color: #e2e0dda5;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.text-container-h h1{
+    font-family: 'Merienda', cursive;    
+    font-size: 40px;
+    font-style: oblique;
+}
+.text-container-h p{
+    font-family: 'Merienda', cursive;
+    font-style: oblique;
+    font-size: 20px;
+}
+.populars-t h3{
+    font-family: 'Merienda', cursive;
+    font-weight: lighter;
+}
+.container-recipe{
+    background-color: #dddfd1;
+    padding-bottom: 100px;
+
+}
+.box-22 {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    padding: 30px 20px;
+    margin-top: 40px;
+    text-align: center;
+    font-size: larger;
+   
+
+}
+
+
+.box-23 a{
+    text-decoration-line: none;
+}
+.box-22 li {
+    
+    display: inline;
+    color: #000;
+    font-weight: bold;
+    
+  }
+.recipes-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+.populars{
+    display: flex;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+.popular{
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 220px;
+    width: 420px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.197);
+    transition: all 0.3s ease;
+}
+.populars-t{
+    display: flex;
+    margin-top: -10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 380px;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+    padding-bottom: 90px;
+}
+.categories-h{
+    display: flex;
+    padding: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.categorie-h {
+    font-size: 12px;
+    padding: 25px;
+    transition: all 0.4s ease-in-out;
+    color: #000;
+  }
+.categorie-h:hover{
+    color :#BC6C25;
+    cursor: pointer;
+  }
+
+.border1 {
+    height: 30px;
+    width: 100%;
+    background: linear-gradient(to bottom, #dddfd1,#f7f7f2 );
+    margin: 0;
+}
+
+.border2 {
+    height: 30px;
+    width: 100%;
+    background: linear-gradient(to bottom, #f7f7f2, #dddfd1 );
+    margin: 0;
+}
+
+.most-liked {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    margin-top: 60px;
+    height: auto;
+}
+.recipe-p {
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 700px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.197);
+    transition: all 0.3s ease;
+    margin-left: 30px;
+}
+
+.recipe-p:hover {
+    opacity: 0.85;
+    transform: scale(1.08);
+    transition-delay: 0.1s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popular:hover {
+    opacity: 0.85;
+    transform: scale(1.08);
+    transition-delay: 0.1s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.recipe:hover img{
+    cursor: pointer;
+}
+
+.recipes-p {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f2;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 40px;
+    height: auto;
+    
+}
+
+.most-liked img {
+    width: 500px;
+    height: auto;
+    margin-right: 5%;
+}
+
+
+.recipe-description-p {
+    transition: transform 0.3s ease;
+    text-align: left;
+    width: 80%;
+    height: 100%;
+    justify-content: center;
+    padding: 40px;
+    padding-left: 80px;
+    padding-right: 80px;
+
+  }
+
+.recipe-description-p p{
+    font-size: 1vw;
+}
+
+.recently{
+    padding-top: 50px;
+}
+.chef {
+    display: flex;
+    padding: auto;
+    text-align: center;
+    align-items: center;
+    margin-top: -20px;
+}
+.chef img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+.recipe.trans{
+    
+    opacity: 1;
+    transform: scale(1.3);
+    transition-delay: 0.1s;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    background-color: rgb(255, 249, 249);
+  }
+
+.recipe {
+    background-color:  #ffffff ;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 300px;
+    height: 300px;
+    padding: 2rem;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.197);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: larger;
+    
+}
+.recipe:hover {
+    opacity: 0.8;
+    transform: scale(1.08);
+    transition-delay: 0.1s;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.recipe:hover img{
+    cursor: pointer;
+}
+
+.recipes {
+    display: grid;
+    width: 100%;
+    margin-top: 150px;
+    padding-bottom: 30px;
+    justify-content: center;
+    grid-column-gap: 60px;
+    grid-row-gap: 130px;
+    grid-template-columns: repeat();
+}
+.recipe-description {
+    transition: transform 0.3s ease;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
+    justify-content: center;
+
+  }
+  
+.recipe-description hr{
+    background-color: #84838041;
+    margin-left: -32px;
+    width: 300px;
+    height: 1px;
+    border: none;
+    margin-top: -2px;
+}
+.v2-p{
+    position: absolute;
+    grid-column-gap: 140px;
+    grid-row-gap: 270px;
+    padding-bottom: 0;
+    transform: translate(-16.5%,-165%);
+
+}
+.image-p{
+    background-color: rgb(220, 135, 31);
+    height: 160px;
+    width:220px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.301);
+  
+}
+.reaction-p{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2.3rem;
+    font-size: 17px;
+
+}
