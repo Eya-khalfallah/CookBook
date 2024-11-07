@@ -1,5 +1,14 @@
 const Recipe = require("../models/Recipe");
 
+exports.getAllRecipes = async (req, res) => {
+    try {
+        const recipes = await Recipe.find();
+        res.json(recipes);
+    } catch (error) {
+        res.status(500).json({ error: "Server Error" });
+    }
+};
+
 exports.createRecipe = async (req, res) => {
     try {
         const {email , name, description, ingredients, category} = req.body;
@@ -15,7 +24,7 @@ exports.createRecipe = async (req, res) => {
         });
         
         await recipe.save();
-        
+
         res.status(201).json({message: "Recipe created successfully"});
     } catch (error) {
         res.status(400).json({ error: "Failed to create recipe xD", details: error.message });
