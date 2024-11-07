@@ -1,198 +1,131 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchLetter, setSearchLetter] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false); // Track whether to show search results or not
+  const [showResults, setShowResults] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch("http://localhost:8000/recipes");
-        const data = await response.json();
-        setRecipes(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchRecipes();
+  const fetchRecipes = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:8000/recipes");
+      const data = await response.json();
+      setRecipes(data);
+    } catch (error) {
+      console.error("Failed to fetch recipes:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
-    if (searchLetter === "") {
-      setSearchResults(recipes);
+    fetchRecipes();
+  }, [fetchRecipes]);
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setSearchResults([]);
+      setShowResults(false);
     } else {
       const filteredRecipes = recipes.filter((recipe) =>
-        recipe.name.startsWith(searchLetter)
+        recipe.name.toLowerCase().startsWith(searchTerm.toLowerCase())
       );
       setSearchResults(filteredRecipes);
+      setShowResults(true);
     }
-    setShowResults(searchLetter !== ""); // Show results only when there is a filter
-  }, [searchLetter, recipes]);
+  }, [searchTerm, recipes]);
 
-  function handleSearchLetterChange(event) {
-    setSearchLetter(event.target.value);
-  }
-
-  let navigate = useNavigate();
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const navigateToRecipe = (recipeId) => {
     navigate(`/item/${recipeId}`);
+    setShowResults(false);
   };
 
-  if (localStorage.getItem("token")) {
-    return (
-      <div className="navbar">
-        <div className="avant log">
-          <div className="nav">
-            <Link className="lien" to="/">
-              Home
-            </Link>
-          </div>
-          <div className="nav">
-            <Link className="lien" to="/recipe">
-              Recipes
-            </Link>
-          </div>
-          <div className="nav">
-            <input
-              className="search"
-              type="text"
-              value={searchLetter}
-              onChange={handleSearchLetterChange}
-              placeholder="Enter a letter to search"
-            />
-          </div>
-          <div className="nav">
-            {" "}
-            <Link
-              className="lien v3"
-              to="/Ajout"
-              style={{ backgroundColor: "rgb(76, 106, 61)", color: "#fff" }}>
-              Ajouter
-            </Link>
-          </div>
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
-          <div className="nav">
-            <button
-              className="btn-h"
-              onClick={() => {
-                navigate("/login");
-                localStorage.removeItem("token");
-              }}>
-              Logout
-            </button>
-          </div>
-          <div className="useeer">
-            <div className="nav">
-            <div className="nav">
-              <Link to="/profil" className="nom">
-                <p className="logout">{localStorage.getItem("name")}</p>
-              </Link>
-            </div>
-              <Link to="/profil">
-                <img
-                  src={localStorage.getItem('photo')}
-                  alt=""
-                  className="photoo"
-                />
-              </Link>
-            </div>
+  const isLoggedIn = !!localStorage.getItem("token");
 
-            
-          </div>
-        </div>
-        {showResults && (
-          <div className="divv">
-            <ul>
-              {searchResults.map((recipe) => (
-                <Link to="/item">
-                  {" "}
-                  <li
-                    key={recipe.id}
-                    onClick={() => navigateToRecipe(recipe.id)}
-                    className="lista">
-                    <img
-                      src={`http://localhost:8000/uploads/${recipe.image}`}
-                      alt=""
-                      width={12}
-                    />
-                    {recipe.name}
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    );
-  }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <div className="navbar">
-      <div className="avant">
-        <div className="nav">
-          <Link className="lien" to="/">
-            Home
-          </Link>
+    <nav className="navbar">
+      <div className="navbar-content">
+        <div className="navbar-logo">
+          <Link to="/">CookBook</Link>
         </div>
-        <div className="nav">
-          {" "}
-          <Link className="lien" to="/recipe">
-            Recipes
-          </Link>
+        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
+          <Link className="nav-link" to="/">Home</Link>
+          <Link className="nav-link" to="/recipe">Recipes</Link>
+          {isLoggedIn && <Link className="nav-link add-recipe" to="/Ajout">Add Recipe</Link>}
         </div>
-        <div className="nav">
+        <div className="navbar-search">
           <input
-            className="search"
+            className="search-input"
             type="text"
-            value={searchLetter}
-            onChange={handleSearchLetterChange}
-            placeholder="Enter a letter to search"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search recipes..."
+            aria-label="Search recipes"
           />
+          {showResults && (
+            <ul className="search-results">
+              {searchResults.map((recipe) => (
+                <li key={recipe.id} onClick={() => navigateToRecipe(recipe.id)}>
+                  <img
+                    src={`http://localhost:8000/uploads/${recipe.image}`}
+                    alt={recipe.name}
+                    width={40}
+                    height={40}
+                  />
+                  <span>{recipe.name}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="nav">
-          <Link className="lien" to="/signup">
-            Sign Up
-          </Link>
+        <div className="navbar-auth">
+          {isLoggedIn ? (
+            <div className="user-actions">
+              <button className="logout-button" onClick={handleLogout}>Logout</button>
+              <div className="user-profile">
+                <Link to="/profil" className="user-name">
+                  {localStorage.getItem("name")}
+                </Link>
+                <Link to="/profil" className="user-photo">
+                  <img
+                    src={localStorage.getItem('photo')}
+                    alt="User profile"
+                  />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Link className="nav-link" to="/signup">Sign Up</Link>
+              <Link className="nav-link login" to="/login">Login</Link>
+            </>
+          )}
         </div>
-        <div className="nav">
-          <Link
-            className="lien v3"
-            to="/login"
-            style={{ backgroundColor: "rgb(76, 106, 61)", color: "#fff" }}>
-            Login
-          </Link>
-        </div>
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-      {showResults && (
-        <div style={{ overflowY: "scroll", maxHeight: "200px" }}>
-          <ul>
-            {searchResults.map((recipe) => (
-              <li
-                key={recipe.id}
-                onClick={() => navigateToRecipe(recipe.id)}
-                className="lista">
-                <img
-                  src={`http://localhost:8000/uploads/${recipe.image}`}
-                  alt=""
-                  width={12}
-                />{" "}
-                {recipe.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+    </nav>
   );
 }
