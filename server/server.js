@@ -9,12 +9,14 @@ const cloudinary = require("cloudinary").v2;
 dotenv.config();
 
 const userRoutes = require("./routes/userRoutes");
+const recipeRoutes = require("./routes/recipeRoutes");
 
 const app = express();
 
 const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODB_URI; // MongoDB connection string
 const port = PORT; // Port to listen on
+
 // Middleware setup
 app.use(express.json()); // To parse incoming JSON requests
 app.use(cors()); // To allow cross-origin requests
@@ -22,6 +24,7 @@ app.use(morgan("dev")); // HTTP request logger for development
 
 // Routes setup
 app.use("/users", userRoutes); // User routes (auth, profile, etc.)
+app.use("/recipes", recipeRoutes);
 
 // Static file handling for uploads (if you need to serve uploaded files)
 app.use("/uploads", express.static("uploads"));

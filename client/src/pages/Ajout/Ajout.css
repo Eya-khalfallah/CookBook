@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Merienda&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+.box {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: Verdana;
+    text-align: center;
+}
+
+.box-outer{
+    padding-top: 20px;
+    text-align: center;
+}
+h1{
+    font-family: 'Merienda', cursive;    
+    font-size: 40px;
+    font-style: oblique;
+}
+.box p{
+    font-family: 'Merienda', cursive;
+    font-style: oblique;
+    font-size: 20px;
+}
+
+.form-container{
+    padding: 100px;
+}
+
+/* Styling the Form (Color, Padding, Shadow) */
+form {
+    background-color: rgba(230, 229, 229, 0.925);
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px 20px;
+    padding-left: 40px; ;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    font-family: 'Comic Neue', cursive;
+}
+
+/* Styling form-control Class */
+.form-control {
+    text-align: left;
+    margin-bottom: 25px;
+    
+}
+
+/* Styling form-control Label */
+.form-control label {
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 25px;
+}
+
+/* Styling form-control input,
+select, textarea */
+.form-control input,
+.form-control select,
+.form-control textarea {
+    border: 1px solid  rgb(238, 223, 223);
+    border-radius: 4px;
+    font-family: inherit;
+    padding: 10px;
+    margin-left: 25px;
+    display: block;
+    width: 86%;
+}
+.btn{
+    margin-left: 30px;
+    background-color:rgb(95, 91, 91);
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight:600;
+  width: 17%;
+  margin-bottom: 20px;
+  height: 35px;
+  color: rgb(255, 255, 255);
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.301); 
+  transition-duration: 0.4s;
+}
+
+.btn:hover{
+    background-color: rgb(158, 155, 155);
+  color: white;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.559);
+}
+
+/* Styling Button */
+#submit {
+    background-color:rgb(76, 106, 61);
+    border:  rgb(102, 143, 81);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight:600;
+    width: 45%;
+    margin-bottom: 20px;
+    height: 45px;
+    color: rgb(255, 255, 255); 
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.301);
+    text-align: center;
+    transform: translate(55%);
+
+}
+#submit:hover{
+    background-color:rgb(94, 148, 67);
+    cursor: pointer;
+    box-shadow: 0px 0px 12px rgba(94, 148, 67, 0.89);
+    transition-duration: 0.6s;
+}
+.alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+.success {
+    background-color: #dff0d8;
+    color: #3c763d;
+    border: 1px solid #d6e9c6;
+    width: 86%;
+    margin-left: 25px;
+}
+
+.error {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid #ebccd1;
+    width: 86%;
+    margin-left: 25px;
+    
+}
