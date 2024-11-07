@@ -12,6 +12,32 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userid);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+};
+
+exports.getUserByEmail = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.query.email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+};
+
 exports.createUser = async (req, res) => {
   try {
     const { email, firstName, lastName, nationality, password, photo } =
