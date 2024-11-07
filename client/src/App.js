@@ -4,7 +4,7 @@ import Item from "./pages/Item/Item";
 import Login from "./pages/Login/Login";
 import Edit from "./pages/Edit/Edit";
 import Profil from "./pages/Profil/Profil";
-import Recipe from "./pages/Recipe/Recipe";
+import Recipe from "./pages/Recipe/Recipes";
 import SignUp from "./pages/SignUp/SignUp";
 import Footer from "./components/Footer/Footer";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -27,8 +27,9 @@ function App() {
           <Route path="/Recipe" element={<Recipe/>} />
           <Route path="*" element={<div>404 not found</div>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
+      
     </>
   );
 }
