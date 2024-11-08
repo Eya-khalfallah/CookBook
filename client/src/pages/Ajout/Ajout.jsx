@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useRecipes } from "../../hooks/RecipeContext";
 import './Ajout.css';
+import FormImage from './img/img3.jpg';
 
 function Ajout() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,15 @@ function Ajout() {
   const [category, setCategory] = useState('');
   const [image, setImage] = useState(null);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const { setRecipes } = useRecipes(); // Accessing setRecipes to update recipes list
+  const [newRecipe, setNewRecipe] = useState({
+    name: "",
+    email: "",
+    description: "",
+    ingredients: [],
+    category: "",
+    image: null
+  });
 
   const apiUrl = 'http://localhost:8000';
 
@@ -25,10 +35,12 @@ function Ajout() {
     formData.append('ingredients', ingredients.join(','));
     formData.append('category', category);
     formData.append('image', image);
+    setNewRecipe(formData);
 
     // Send the recipe data to the server
     try {
-      const response = await axios.post(`${apiUrl}/recipes/create`, formData,{
+      const response = await axios.post(`${apiUrl}/recipes/create`, formData, {
+        method: "POST",
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -36,6 +48,8 @@ function Ajout() {
 
       if (response.status === 201) {
         // Recipe was successfully saved
+        setRecipes(prevRecipes => [...prevRecipes, response.data]); // Update the recipes list
+
         // Reset form fields
         setEmail('');
         setName('');
@@ -46,7 +60,6 @@ function Ajout() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setSubmitStatus({ message: 'Recipe saved successfully', type: 'success' });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         setSubmitStatus({ message: 'Error saving recipe', type: 'error' });
       }
     } catch (error) {
@@ -74,7 +87,7 @@ function Ajout() {
   };
 
   return (
-    <div className='box' style={{ backgroundImage: `url(${require('./img/img3.jpg')})`}}>
+    <div className='box' style={{ backgroundImage: `url(${FormImage})` }}>
       <div className='form-container'>
         <form encType='multipart/form-data' id='form'>
           <div className='box-outer'>
@@ -143,9 +156,10 @@ function Ajout() {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option>Select Category</option>
-                <option value='Dessert'>Dessert</option>
-                <option value='Lunch'>Lunch</option>
-                <option value='Dinner'>Dinner</option>
+                <option value='Starters'>Starters</option>
+                <option value='Main courses'>Main courses</option>
+                <option value='Side dishes'>Side dishes</option>
+                <option value='Desserts'>Desserts</option>
               </select>
             </div>
 

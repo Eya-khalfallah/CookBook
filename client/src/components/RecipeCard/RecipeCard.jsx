@@ -4,23 +4,6 @@ import "./RecipeCard.css";
 
 // {imagePath, avatarPath, title, author, likes, comments}
 export default function RecipeCard(props) {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const fetchChef = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/users/?email=${props.e[0]}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setUser(data);
-      } catch (error) {
-        console.error("Failed to fetch chef:", error);
-      }
-    };
-    fetchChef();
-  }, []); // Run once on component mount
 
   return (
     <div className="card">
@@ -28,7 +11,7 @@ export default function RecipeCard(props) {
         <img
           alt="Recipe"
           className="card-image"
-          src={props.e[2]} // Assuming this is the image path
+          src={props.e[0]} // Assuming this is the image path
         />
       </div>
       <div className="card-header">
@@ -38,12 +21,12 @@ export default function RecipeCard(props) {
             <img
               alt="Author avatar"
               className="avatar-image"
-              src={user ? user.photo : "/path/to/default/avatar.jpg"} // Fallback image
+              src={props.e[3]} // Fallback image
             />
             <span className="avatar-fallback">SP</span>
           </div>
           <span className="author-name">
-            {user ? `${user.firstName} ${user.lastName}` : "Loading..."}
+            {props.e[2]}
           </span>
         </div>
       </div>

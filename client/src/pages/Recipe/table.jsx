@@ -10,7 +10,7 @@ function Table(props) {
   return (
     <div className="h-recipes">
       {recipes.map(recipe => (
-        <RecipeCard key={recipe._id} e={[recipe.email ,recipe.name, recipe.image, recipe.nb_likes, recipe.comment]} />
+        <RecipeCard key={recipe._id} e={[recipe.image, recipe.name, recipe.chef.name ,recipe.chef.photo , recipe.nb_likes, recipe.comment]} />
       ))}
     </div>
   );
