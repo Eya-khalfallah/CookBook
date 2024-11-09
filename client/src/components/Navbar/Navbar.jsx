@@ -6,6 +6,7 @@ export default function Navbar() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPage, setSelectedPage] = useState("Home");
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,16 +62,35 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handlePageClick = (page) => {
+    setSelectedPage(page);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-content">
         <div className="navbar-logo">
           <Link to="/">CookBook</Link>
         </div>
-        <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/recipe/ALL/page1">Recipes</Link>
-          {isLoggedIn && <Link className="nav-link add-recipe" to="/Ajout">Add Recipe</Link>}
+        <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
+          <Link
+            className={`nav-link ${selectedPage === "Home" ? "active" : ""}`}
+            onClick={() => handlePageClick("Home")}
+            to="/">
+            Home
+          </Link>
+          <Link
+            className={`nav-link ${selectedPage === "Recipes" ? "active" : ""}`}
+            onClick={() => handlePageClick("Recipes")}
+            to="/recipe/ALL/page1">
+            Recipes
+          </Link>
+          {isLoggedIn && (
+            <Link className={`nav-link add-recipe ${selectedPage === "Add Recipe" ? "active" : ""}`}
+            onClick={() => handlePageClick("Add Recipe")} to="/Ajout">
+              Add Recipe
+            </Link>
+          )}
         </div>
         <div className="navbar-search">
           <input
@@ -100,27 +120,33 @@ export default function Navbar() {
         <div className="navbar-auth">
           {isLoggedIn ? (
             <div className="user-actions">
-              <button className="logout-button" onClick={handleLogout}>Logout</button>
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
               <div className="user-profile">
                 <Link to="/profil" className="user-name">
                   {localStorage.getItem("name")}
                 </Link>
                 <Link to="/profil" className="user-photo">
-                  <img
-                    src={localStorage.getItem('photo')}
-                    alt="User profile"
-                  />
+                  <img src={localStorage.getItem("photo")} alt="User profile" />
                 </Link>
               </div>
             </div>
           ) : (
             <>
-              <Link className="nav-link" to="/signup">Sign Up</Link>
-              <Link className="nav-link login" to="/login">Login</Link>
+              <Link className="nav-link" to="/signup">
+                Sign Up
+              </Link>
+              <Link className="nav-link login" to="/login">
+                Login
+              </Link>
             </>
           )}
         </div>
-        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+        <button
+          className="menu-toggle"
+          onClick={toggleMenu}
+          aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>

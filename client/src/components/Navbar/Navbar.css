@@ -57,6 +57,11 @@
   width: 100%;
 }
 
+.nav-link.active {
+  color: #BC6C25;
+  font-weight: bold;
+}
+
 .navbar-search {
   position: relative;
 }
