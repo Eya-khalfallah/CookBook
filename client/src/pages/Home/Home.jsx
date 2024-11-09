@@ -3,24 +3,28 @@ import { BsHeart } from "react-icons/bs";
 import { FaRegComment } from "react-icons/fa";
 import "./Home.css";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import HomeImage1 from "./img/photo93.jpg";
+import HomeImage2 from "./img/photo17.jpg";
+import HomeImage3 from "./img/home22.jpg";
 
 const preloadImages = (imagePaths) => {
   return imagePaths.map((path) => {
     const img = new Image();
-    img.src = require(`${path}`);
+    img.src = `${path}`;
     return img;
   });
 };
 
 function Home() {
   const imagePaths = [
-    "./img/photo93.jpg",
-    "./img/photo17.jpg",
-    "./img/home22.jpg",
+    HomeImage1,
+    HomeImage2,
+    HomeImage3
   ];
   const [featuredImage, setFeaturedImage] = useState(
-    require(`${imagePaths[0]}`)
+    `${imagePaths[0]}`
   ); // Set initial image directly
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -53,7 +57,7 @@ function Home() {
     <div>
       <div className="container-recipe">
         <div className={`box-13 ${isTransitioning ? "transitioning" : ""}`}>
-          <img src={featuredImage} alt="Loading" />
+          <img src={featuredImage} alt="Loading" loading="lazy" />
           <div className="text-container-h">
             <h1>
               DELICIOUS RECIPES <br />
@@ -68,21 +72,27 @@ function Home() {
               <h2>Popular Categories</h2>
             </div>
             <div className="populars">
-              <div
+            <Link
+                to="/recipe/DESSERTS/page1"
                 className="popular"
                 style={{
                   backgroundImage: `url(${require("./img/desserts23.jpg")})`,
-                }}></div>
-              <div
+                }}
+              ></Link>
+            <Link
+                to="/recipe/MAIN COURSES/page1"
                 className="popular"
                 style={{
                   backgroundImage: `url(${require("./img/photo4.jpg")})`,
-                }}></div>
-              <div
+                }}
+              ></Link>
+            <Link
+                to="/recipe/STARTERS/page1"
                 className="popular"
                 style={{
                   backgroundImage: `url(${require("./img/starters21.jpg")})`,
-                }}></div>
+                }}
+              ></Link>
             </div>
             <div className="populars-t">
               <h3>Desserts</h3>
@@ -124,18 +134,19 @@ function Home() {
                 <h2>Most Recent Recipes</h2>
               </div>
               <div style={{ display: "grid",  gridTemplateColumns: "repeat(3, 1fr)", columnGap: "7vw", rowGap: "7vh", justifyContent:"center", alignItems:"center"}}>
+              {/* <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
               <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
               <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
               <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
               <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
+              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" /> */}
               </div>
              
             </div>
           </div>
         </div>
       </div>
+      <div className="border1"></div>
     </div>
   );
 }

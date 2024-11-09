@@ -6,5 +6,6 @@ const upload = require('../middlewares/cloudinaryStorage');
 // Recipe routes
 router.post('/create', upload.single('image'), recipeController.createRecipe);
 router.get('/all', recipeController.getAllRecipes);
+router.get('/', recipeController.getRecipeByCategory);
 
 module.exports = router;

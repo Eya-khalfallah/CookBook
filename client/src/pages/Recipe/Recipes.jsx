@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useRecipes } from "../../hooks/RecipeContext";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Pagination from "./pagination";
 import Table from "./table";
 import "./home.css";
 import "./Recipe.css";
+import RecipesImage from "./img/home12.jpg";
+
 
 function Recipe() {
   const { pageNumber } = useParams();
+  const { category } = useParams();
   const [page, setPage] = useState(parseInt(pageNumber) || 1);
 
   const [limit] = useState(9);
-  const { recipes, setRecipes } = useRecipes(); // Accessing recipes and setRecipes
+  const { recipes, setRecipes } = useRecipes();
+
+  const [selectedCategory, setSelectedCategory] = useState(category || "ALL");
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await fetch("http://localhost:8000/recipes/all");
         const data = await response.json();
-
         setRecipes(data.recipes.reverse());
       } catch (error) {
         console.error("Error fetching recipes:");
@@ -28,11 +34,31 @@ function Recipe() {
     fetchRecipes();
   }, [setRecipes]);
 
-  const getRecipes = (page, limit) => {
-    return recipes.slice((page - 1) * limit, page * limit);
+  // This will filter the recipes when the selected category changes
+  useEffect(() => {
+    if (selectedCategory === "ALL") {
+      setFilteredRecipes(recipes); // Show all recipes
+    } else {
+      const filtered = recipes.filter(
+        (recipe) =>
+          recipe.category.toUpperCase() === selectedCategory.toUpperCase()
+      );
+
+      setFilteredRecipes(filtered);
+    }
+  }, [selectedCategory, recipes]);
+
+  // Handle category click to update the selected category
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category); // Update selected category
+    setPage(1);
   };
 
-  const totalPages = Math.ceil(recipes.length / limit);
+  const getRecipes = (page, limit) => {
+    return filteredRecipes.slice((page - 1) * limit, page * limit);
+  };
+
+  const totalPages = Math.ceil(filteredRecipes.length / limit);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -42,7 +68,7 @@ function Recipe() {
     <div className="parent">
       <div className="container-h-recipe">
         <div className="box-12">
-          <img src={require("./img/home12.jpg")} alt="Home" />
+          <img src={RecipesImage} alt="Home" loading="lazy" />
           <div className="text-container">
             <h1>EXPLORE RECIPES</h1>
           </div>
@@ -51,11 +77,56 @@ function Recipe() {
           <div className="h-recipes-container">
             <div className="categories">
               <ul>
-                <li><a className="categorie">ALL</a></li>
-                <li><a className="categorie">STARTERS</a></li>
-                <li><a className="categorie">MAIN COURSES</a></li>
-                <li><a className="categorie">SIDE DISHES</a></li>
-                <li><a className="categorie">DESSERTS</a></li>
+                <li>
+                  <Link
+                    className={`categorie ${
+                      selectedCategory === "ALL" ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick("ALL")}
+                    to={"/recipe/ALL/page1"}>
+                    ALL
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`categorie ${
+                      selectedCategory === "STARTERS" ? "active" : ""
+                    }`}
+                    onClick={() => {handleCategoryClick("STARTERS"); }}
+                    to={"/recipe/STARTERS/page1"}>
+                    STARTERS
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`categorie ${
+                      selectedCategory === "MAIN COURSES" ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick("MAIN COURSES")}
+                    to={"/recipe/MAIN COURSES/page1"}>
+                    MAIN COURSES
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`categorie ${
+                      selectedCategory === "SIDE DISHES" ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick("SIDE DISHES")}
+                    to={"/recipe/SIDE DISHES/page1"}>
+                    SIDE DISHES
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`categorie ${
+                      selectedCategory === "DESSERTS" ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick("DESSERTS")}
+                    to={"/recipe/DESSERTS/page1"}>
+                    DESSERTS
+                  </Link>
+                </li>
               </ul>
             </div>
             <Table recipe={getRecipes(page, limit)} />
@@ -65,6 +136,7 @@ function Recipe() {
               limit={limit}
               siblings={1}
               onPageChange={handlePageChange}
+              category={selectedCategory}
             />
           </div>
         </div>

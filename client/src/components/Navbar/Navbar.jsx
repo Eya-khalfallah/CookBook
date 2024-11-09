@@ -69,7 +69,7 @@ export default function Navbar() {
         </div>
         <div className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
           <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/recipe/page1">Recipes</Link>
+          <Link className="nav-link" to="/recipe/ALL/page1">Recipes</Link>
           {isLoggedIn && <Link className="nav-link add-recipe" to="/Ajout">Add Recipe</Link>}
         </div>
         <div className="navbar-search">

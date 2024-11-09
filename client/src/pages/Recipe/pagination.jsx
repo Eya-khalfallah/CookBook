@@ -6,7 +6,7 @@ function Pagination(props) {
   const location = useLocation();
 
   // Get the page range based on the total pages, current page, limit, and siblings
-  const array = returnPaginationRange(props.totalPage, props.page, props.limit, props.siblings);
+  const array = returnPaginationRange(props.totalPage, props.page, props.limit, props.siblings, props.category);
 
   // Determine next and previous pages
   const nextPage = props.page + 1 <= props.totalPage ? props.page + 1 : props.totalPage;
@@ -15,12 +15,12 @@ function Pagination(props) {
   return (
     <div className="nav">
       {/* First Page (<<) */}
-      <Link to={`/recipe/page${1}`} className="PageItem" onClick={() => props.onPageChange("&laquo;")}>
+      <Link to={`/recipe/${props.category}/page${1}`} className="PageItem" onClick={() => props.onPageChange("&laquo;")}>
         &laquo;
       </Link>
 
       {/* Previous Page (<) */}
-      <Link to={`/recipe/page${previousPage}`} className="PageItem" onClick={() => props.onPageChange("&lsaquo;")}>
+      <Link to={`/recipe/${props.category}/page${previousPage}`} className="PageItem" onClick={() => props.onPageChange("&lsaquo;")}>
         &lsaquo;
       </Link>
 
@@ -38,7 +38,7 @@ function Pagination(props) {
         } else {
           // Render other pages as clickable links
           return (
-            <Link to={`/recipe/page${pt}`} key={value} className="PageItem" onClick={() => props.onPageChange(value)}>
+            <Link to={`/recipe/${props.category}/page${pt}`} key={value} className="PageItem" onClick={() => props.onPageChange(value)}>
               {value}
             </Link>
           );
@@ -46,12 +46,12 @@ function Pagination(props) {
       })}
 
       {/* Next Page (>) */}
-      <Link to={`/recipe/page${nextPage}`} className="PageItem" onClick={() => props.onPageChange("&rsaquo;")}>
+      <Link to={`/recipe/${props.category}/page${nextPage}`} className="PageItem" onClick={() => props.onPageChange("&rsaquo;")}>
         &rsaquo;
       </Link>
 
       {/* Last Page (>>) */}
-      <Link to={`/recipe/page${props.totalPage}`} className="PageItem" onClick={() => props.onPageChange("&raquo;")}>
+      <Link to={`/recipe/${props.category}/page${props.totalPage}`} className="PageItem" onClick={() => props.onPageChange("&raquo;")}>
         &raquo;
       </Link>
     </div>

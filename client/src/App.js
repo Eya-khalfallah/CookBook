@@ -25,7 +25,7 @@ function App() {
             <Route path="/Profil" element={<Profil />} />
             <Route path="/home" element={<Home />} />
             <Route path="/SignUP" element={<SignUp />} />
-            <Route path="/recipe/:page" element={<Recipe />} />
+            <Route path="/recipe/:category/:page" element={<Recipe />} />
             <Route path="*" element={<div>404 not found</div>} />
           </Routes>
           <Footer />
