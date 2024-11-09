@@ -1,6 +1,4 @@
 import React from "react";
-import { BsHeart } from "react-icons/bs";
-import { FaRegComment } from "react-icons/fa";
 import "./Home.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -8,6 +6,7 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import HomeImage1 from "./img/photo93.jpg";
 import HomeImage2 from "./img/photo17.jpg";
 import HomeImage3 from "./img/home22.jpg";
+import { useRecipes } from "../../hooks/RecipeContext";
 
 const preloadImages = (imagePaths) => {
   return imagePaths.map((path) => {
@@ -18,6 +17,21 @@ const preloadImages = (imagePaths) => {
 };
 
 function Home() {
+  const { recipes, setRecipes } = useRecipes();
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/recipes/all");
+        const data = await response.json();
+        setRecipes(data.recipes.reverse());
+      } catch (error) {
+        console.error("Error fetching recipes:");
+      }
+    };
+
+    fetchRecipes();
+  }, [setRecipes]);
+
   const imagePaths = [
     HomeImage1,
     HomeImage2,
@@ -134,12 +148,9 @@ function Home() {
                 <h2>Most Recent Recipes</h2>
               </div>
               <div style={{ display: "grid",  gridTemplateColumns: "repeat(3, 1fr)", columnGap: "7vw", rowGap: "7vh", justifyContent:"center", alignItems:"center"}}>
-              {/* <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" />
-              <RecipeCard imagePath="/thai-food.jpg" avatarPath="/chef.jpg" /> */}
+              {recipes.slice(0, 6).map((recipe) => (
+                <RecipeCard key={recipe._id} e={[recipe.image, recipe.name, recipe.chef.name, recipe.chef.photo, recipe.nb_likes, recipe.comment]} />
+              ))}
               </div>
              
             </div>
