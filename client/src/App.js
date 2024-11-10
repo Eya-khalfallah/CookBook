@@ -10,6 +10,7 @@ import Footer from "./components/Footer/Footer";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import { RecipeProvider } from "./hooks/RecipeContext";
+import RecipeDetails from "./pages/Recipe/RecipeDetails";
 function App() {
   return (
     <>
@@ -26,6 +27,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/SignUP" element={<SignUp />} />
             <Route path="/recipe/:category/:page" element={<Recipe />} />
+            <Route path="/details/:recipeId" element={<RecipeDetails />} />
             <Route path="*" element={<div>404 not found</div>} />
           </Routes>
           <Footer />

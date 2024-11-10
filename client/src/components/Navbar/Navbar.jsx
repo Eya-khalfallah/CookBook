@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const fetchRecipes = useCallback(async () => {
+ /*  const fetchRecipes = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await fetch("http://localhost:8000/recipes");
@@ -49,7 +49,7 @@ export default function Navbar() {
   const navigateToRecipe = (recipeId) => {
     navigate(`/item/${recipeId}`);
     setShowResults(false);
-  };
+  }; */
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -86,7 +86,7 @@ export default function Navbar() {
             Recipes
           </Link>
           {isLoggedIn && (
-            <Link className={`nav-link add-recipe ${selectedPage === "Add Recipe" ? "active" : ""}`}
+            <Link className={"nav-link add-recipe "}
             onClick={() => handlePageClick("Add Recipe")} to="/Ajout">
               Add Recipe
             </Link>
@@ -97,14 +97,15 @@ export default function Navbar() {
             className="search-input"
             type="text"
             value={searchTerm}
-            onChange={handleSearchChange}
+            //onChange={handleSearchChange}
             placeholder="Search recipes..."
             aria-label="Search recipes"
           />
           {showResults && (
             <ul className="search-results">
               {searchResults.map((recipe) => (
-                <li key={recipe.id} onClick={() => navigateToRecipe(recipe.id)}>
+                <li key={recipe.id} //onClick={() => navigateToRecipe(recipe.id)}
+                >
                   <img
                     src={`http://localhost:8000/uploads/${recipe.image}`}
                     alt={recipe.name}
@@ -124,10 +125,10 @@ export default function Navbar() {
                 Logout
               </button>
               <div className="user-profile">
-                <Link to="/profil" className="user-name">
+                <Link to="/profil" className="user-name" onClick={() => handlePageClick("Profile")}>
                   {localStorage.getItem("name")}
                 </Link>
-                <Link to="/profil" className="user-photo">
+                <Link to="/profil" className="user-photo" onClick={() => handlePageClick("Profile")}>
                   <img src={localStorage.getItem("photo")} alt="User profile" />
                 </Link>
               </div>

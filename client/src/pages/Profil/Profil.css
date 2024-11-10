@@ -40,7 +40,10 @@ body{
 
   /* products */
 .container-product {
-    background-image: url('./pic4.png');
+    background-image: url('./back.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     padding-bottom: 100px;
     position: relative;
 }
@@ -129,7 +132,6 @@ li {
     z-index: 100;
     left: 50%;
     transform:translate(-150%,-30%) ;
-    background-image: url('./eyaa.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -137,3 +139,19 @@ li {
         
   }
 
+  .recipe-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .recipe-list {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+  }

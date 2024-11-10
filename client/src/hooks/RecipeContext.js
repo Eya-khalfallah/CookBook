@@ -5,6 +5,7 @@ const RecipeContext = createContext();
 
 // Create a provider component
 export const RecipeProvider = ({ children }) => {
+  
   const [recipes, setRecipes] = useState([]);
 
   return (
