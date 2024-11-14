@@ -1,7 +1,6 @@
 import Home from "./pages/Home/Home";
 import Ajout from "./pages/Ajout/Ajout";
 import Login from "./pages/Login/Login";
-import Edit from "./pages/Edit/Edit";
 import Profil from "./pages/Profil/Profil";
 import Recipe from "./pages/Recipe/Recipes";
 import SignUp from "./pages/SignUp/SignUp";
@@ -20,7 +19,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/Ajout" element={<Ajout />} />
             <Route path="/Login" element={<Login />} />
-            <Route path="/Edit" element={<Edit />} />
             <Route path="/Profil" element={<Profil />} />
             <Route path="/home" element={<Home />} />
             <Route path="/SignUP" element={<SignUp />} />
