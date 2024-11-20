@@ -23,8 +23,8 @@ CookBook is a modern recipe finder web app that connects food enthusiasts, enabl
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/cookbook.git
-   cd cookbook
+   git clone https://github.com/Eya-khalfallah/CookBook.git
+   cd CookBook
    ```
 
 2. Install dependencies for both the client and server:
